@@ -74,6 +74,18 @@
     color:var(--grey);margin-bottom:8px}
   .msg-box .msg{font-family:'Archivo Black';font-size:22px;color:var(--accent);letter-spacing:.01em}
 
+  /* DM buttons stack */
+  .dm-btns{display:flex;flex-direction:column;gap:10px}
+
+  /* Facebook button */
+  .fb-btn{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;
+    background:#1877f2;color:#fff;font-family:'Archivo Black';text-transform:uppercase;font-size:16px;
+    text-decoration:none;border-radius:12px;padding:17px;
+    transition:transform .15s,box-shadow .15s}
+  .fb-btn:active{transform:scale(.99)}
+  .fb-btn:hover{box-shadow:0 12px 30px rgba(24,119,242,.45)}
+  .fb-btn svg{width:24px;height:24px;flex-shrink:0;border-radius:5px}
+
   /* IG button */
   .ig-btn{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;
     background:linear-gradient(95deg,#feda75,#d62976 45%,#962fbf 80%,#4f5bd5);
@@ -94,20 +106,6 @@
   .tt-btn:active{transform:scale(.99)}
   .tt-btn:hover{box-shadow:0 12px 30px rgba(254,44,85,.35);border-color:#fe2c55}
   .tt-btn svg{width:22px;height:22px;flex-shrink:0}
-
-  /* OR divider between buttons */
-  .or-divider{display:flex;align-items:center;gap:12px;margin:12px 0;
-    color:var(--grey);font-size:10px;font-weight:800;letter-spacing:.18em}
-  .or-divider::before,.or-divider::after{content:"";flex:1;height:1px;background:var(--line)}
-
-  .handle-note{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
-    color:var(--grey);font-size:13px;font-weight:700;margin-top:16px;text-align:center}
-  .handle-note b{color:var(--grey)}
-  .fb-link{display:inline-flex;align-items:center;text-decoration:none;
-    transition:opacity .15s,transform .15s;line-height:0}
-  .fb-link:hover{opacity:.9;transform:scale(1.08)}
-  .fb-link svg{width:30px;height:30px;display:block;border-radius:7px;
-    box-shadow:0 2px 6px rgba(24,119,242,.35)}
 
   /* steps recap */
   .recap{margin-top:38px}
@@ -151,9 +149,8 @@
     .step{padding:24px 18px;border-radius:16px}
     .msg-box{padding:16px 14px}
     .msg-box .msg{font-size:20px}
-    .ig-btn,.tt-btn{font-size:15px;padding:15px;gap:9px}
-    .ig-btn svg,.tt-btn svg{width:20px;height:20px}
-    .handle-note{font-size:12px}
+    .fb-btn,.ig-btn,.tt-btn{font-size:15px;padding:15px;gap:9px}
+    .fb-btn svg,.ig-btn svg,.tt-btn svg{width:20px;height:20px}
     .recap{margin-top:30px}
     .recap-item{padding:12px 14px}
     .recap-item p{font-size:13px}
@@ -194,8 +191,8 @@
 
     <div class="step">
       <span class="req-tag">⚠ Required to qualify</span>
-      <h2>DM Us On Instagram or TikTok</h2>
-      <p class="lead">Send us a quick message on Instagram or TikTok so we know you're serious.</p>
+      <h2>DM Us On Facebook, Instagram or TikTok</h2>
+      <p class="lead">Send us a quick message on one of these so we know you're serious.</p>
       <p class="warn">No DM = your application won't be counted.</p>
 
       <div class="msg-box">
@@ -203,9 +200,14 @@
         <div class="msg">"I've entered"</div>
       </div>
 
-      <!-- ▼ REPLACE the href with your IG handle: https://ig.me/m/YOUR_HANDLE  (opens DM directly) ▼ -->
-      <a class="ig-btn" href="https://www.instagram.com/carlystuart_betterbodyacademy/" target="_blank" rel="noopener">
-        <span class="ig-icon"><svg viewBox="0 0 24 24" aria-label="Instagram">
+            <div class="dm-btns">
+        <a class="fb-btn" href="https://m.me/CarlyStuartBBA" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-label="Facebook"><rect width="24" height="24" rx="5" fill="#1877f2"/><path fill="#fff" d="M15.997 22v-7.844h2.628l.394-3.054h-3.022V9.155c0-.884.246-1.487 1.515-1.487h1.617V4.937c-.28-.037-1.24-.12-2.358-.12-2.334 0-3.93 1.424-3.93 4.04v2.245H8.207v3.054h2.634V22h5.156z"/></svg>
+          Facebook
+        </a>
+
+        <a class="ig-btn" href="https://www.instagram.com/carlystuart_betterbodyacademy/" target="_blank" rel="noopener">
+          <span class="ig-icon"><svg viewBox="0 0 24 24" aria-label="Instagram">
           <defs>
             <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#feda75"/>
@@ -220,25 +222,17 @@
           <circle cx="12" cy="12" r="3.6" fill="none" stroke="#fff" stroke-width="1.6"/>
           <circle cx="17.2" cy="6.8" r="1" fill="#fff"/>
         </svg></span>
-        Open Instagram &amp; send it
-      </a>
+          Instagram
+        </a>
 
-      <div class="or-divider">OR</div>
-
-      <!-- ▼ REPLACE the href with your TikTok handle ▼ -->
-      <a class="tt-btn" href="https://www.tiktok.com/@carlystuart_bba?_r=1&amp;_t=ZN-96hbijekd6M" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-label="TikTok">
+        <a class="tt-btn" href="https://www.tiktok.com/@carlystuart_bba?_r=1&amp;_t=ZN-96hbijekd6M" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-label="TikTok">
           <path fill="#25F4EE" d="M18.59 6.19a4.83 4.83 0 01-3.77-4.25V1.5h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V8.9a6.84 6.84 0 00-1-.05A6.33 6.33 0 004.8 19.6a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/>
           <path fill="#FE2C55" d="M20.59 7.19a4.83 4.83 0 01-3.77-4.25V2.5h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.9a6.84 6.84 0 00-1-.05A6.33 6.33 0 006.8 20.6a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/>
           <path fill="#fff" d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.8 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/>
         </svg>
-        Open TikTok &amp; send it
-      </a>
-
-      <p class="handle-note">DM ME ON <a class="fb-link" href="https://m.me/CarlyStuartBBA" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-label="Facebook">
-        <rect width="24" height="24" rx="5" fill="#1877f2"/>
-        <path fill="#fff" d="M15.997 22v-7.844h2.628l.394-3.054h-3.022V9.155c0-.884.246-1.487 1.515-1.487h1.617V4.937c-.28-.037-1.24-.12-2.358-.12-2.334 0-3.93 1.424-3.93 4.04v2.245H8.207v3.054h2.634V22h5.156z"/>
-      </svg></a></p>
+          TikTok
+        </a>
+      </div>
     </div>
 
     <div class="recap">
