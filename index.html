@@ -96,24 +96,59 @@
         right: 30px;
       }
       @media (max-width: 600px) {
+        .strip {
+          padding: 7px 14px;
+          font-size: 11px;
+        }
         .hero {
-          padding: 90px 0 16px;
+          padding: 64px 0 8px;
         }
         .logo-corner {
-          top: 14px;
-          width: 56px;
-          height: 56px;
+          top: 12px;
+          width: 50px;
+          height: 50px;
         }
         .logo-corner.left {
           left: 50%;
           transform: translateX(-50%);
-          width: 140px;
+          width: 120px;
         }
         .logo-corner.right {
           right: 12px;
         }
+        .eyebrow {
+          margin-bottom: 8px;
+        }
+        .hero-birthday {
+          margin-bottom: 10px;
+        }
+        .hero-apply {
+          margin-bottom: 12px;
+        }
+        .hero h1 {
+          margin-bottom: 6px;
+        }
+        .hero p.sub {
+          display: none;
+        }
         .offer {
-          padding: 22px 0;
+          padding: 12px 0;
+        }
+        .sec-tag {
+          margin-bottom: 4px;
+        }
+        .sec-title {
+          margin-bottom: 10px;
+        }
+        .offer-card {
+          padding: 16px 18px;
+          margin-bottom: 0;
+        }
+        .offer-card .big {
+          font-size: 26px;
+        }
+        .badge {
+          margin-bottom: 8px;
         }
       }
       .eyebrow {
@@ -127,6 +162,34 @@
         border-radius: 100px;
         padding: 6px 14px;
         margin-bottom: 20px;
+      }
+      .hero-birthday {
+        display: block;
+        width: 100%;
+        max-width: 850px;
+        height: auto;
+        margin: 0 auto 24px;
+        border-radius: 12px;
+      }
+      .hero-apply {
+        display: inline-block;
+        background: var(--accent);
+        color: #0c2230;
+        font-family: "Archivo Black";
+        text-transform: uppercase;
+        font-size: 14px;
+        text-decoration: none;
+        border-radius: 10px;
+        padding: 11px 28px;
+        margin: 0 auto 28px;
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .hero-apply:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
       }
       .hero h1 {
         font-size: clamp(28px, 8vw, 40px);
@@ -932,6 +995,19 @@
         .hero h1 {
           font-size: clamp(24px, 7vw, 32px);
         }
+        /* tighten generous section spacing on phones for a consistent, compact feel */
+        section {
+          padding: 30px 0;
+        }
+        .sec-title {
+          margin-bottom: 18px;
+        }
+        .form-box {
+          padding: 22px 16px;
+        }
+        .filter-col {
+          padding: 18px 16px;
+        }
       }
     </style>
   </head>
@@ -943,6 +1019,8 @@
       <img src="img/logo123.png" alt="Better Body Academy" class="logo-corner left">
       <div class="wrap">
         <span class="eyebrow">BBA Scholarship</span>
+        <img src="img/birthday.jpg" alt="Jase's Birthday — Win 6 Months Free Coaching" class="hero-birthday">
+        <a href="#apply" class="hero-apply">Apply Now</a>
         <h1>Win <span class="accent">6 Months Free</span> Coaching.</h1>
         <p class="sub">
           We're giving away a full 6-month scholarship into the Academy. Watch
