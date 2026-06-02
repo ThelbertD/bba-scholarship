@@ -990,12 +990,17 @@
         .hero h1 {
           font-size: clamp(24px, 7vw, 32px);
         }
-        /* full-bleed birthday banner: break out of the .wrap's 18px side padding.
-           Placed here (after the base .hero-birthday rule) so it actually wins. */
+        /* full-bleed birthday banner: span the full viewport width, centered.
+           Uses vw + centering so it's immune to the wrap's padding (the
+           calc()/negative-margin approach left an uneven side gap).
+           Placed after the base .hero-birthday rule so it actually wins. */
         .hero-birthday {
-          width: calc(100% + 36px);
-          max-width: none;
-          margin: 0 -18px 12px;
+          width: 100vw;
+          max-width: 100vw;
+          margin-left: 50%;
+          margin-right: 0;
+          margin-bottom: 12px;
+          transform: translateX(-50%);
           border-radius: 0;
         }
         /* tighten generous section spacing on phones for a consistent, compact feel */
