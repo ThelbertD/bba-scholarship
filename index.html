@@ -116,8 +116,16 @@
       }
       @media (max-width: 600px) {
         .strip {
-          padding: 7px 14px;
-          font-size: 11px;
+          /* reserve room on both sides so the right-side badge never
+             overlaps the centered text */
+          padding: 7px 44px;
+          font-size: 10px;
+          letter-spacing: 0.02em;
+        }
+        .strip-badge {
+          width: 28px;
+          height: 28px;
+          right: 10px;
         }
         .hero {
           padding: 20px 0 8px;
@@ -1038,7 +1046,7 @@
     <!-- HERO + VIDEO -->
     <header class="hero">
       <div class="wrap">
-        <img src="img/birthday.jpg" alt="Jase's Birthday — Win 6 Months Free Coaching" class="hero-birthday">
+        <img src="img/WEBFILES%20(2).jpg" alt="Jase's Birthday — Win 6 Months Free Coaching" class="hero-birthday">
         <a href="#apply" class="hero-apply">Apply Now</a>
         <h1>Win <span class="accent">6 Months Free</span> Coaching.</h1>
         <p class="sub">
