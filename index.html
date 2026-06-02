@@ -62,7 +62,20 @@
         font-size: 12px;
         letter-spacing: 0.03em;
         text-transform: uppercase;
-        padding: 10px 14px;
+        padding: 8px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .strip-badge {
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        object-fit: cover;
+        /* JPEG has a light square background — clip to the round badge */
+        clip-path: circle(47%);
       }
 
       /* hero */
@@ -152,14 +165,6 @@
         border-radius: 100px;
         padding: 6px 14px;
         margin-bottom: 20px;
-      }
-      .hero-badge {
-        display: block;
-        width: 110px;
-        height: auto;
-        margin: 0 auto 18px;
-        /* JPEG has a light square background — clip to the round badge */
-        clip-path: circle(47%);
       }
       .hero-birthday {
         display: block;
@@ -1022,12 +1027,14 @@
     </style>
   </head>
   <body>
-    <div class="strip">⚡ Limited spots — applications close soon</div>
+    <div class="strip">
+      <img src="img/right.jpeg" alt="Better Body Academy — Transformation Team" class="strip-badge">
+      <span>⚡ Limited spots — applications close soon</span>
+    </div>
 
     <!-- HERO + VIDEO -->
     <header class="hero">
       <div class="wrap">
-        <img src="img/right.jpeg" alt="Better Body Academy — Transformation Team" class="hero-badge">
         <img src="img/birthday.jpg" alt="Jase's Birthday — Win 6 Months Free Coaching" class="hero-birthday">
         <a href="#apply" class="hero-apply">Apply Now</a>
         <h1>Win <span class="accent">6 Months Free</span> Coaching.</h1>
