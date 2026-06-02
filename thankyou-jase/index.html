@@ -20,8 +20,11 @@
   h1,h2,h3{font-family:'Archivo Black',sans-serif;text-transform:uppercase;line-height:1.05;letter-spacing:-.01em}
   .accent{color:var(--accent)}
 
-  .strip{background:var(--accent);color:#0c2230;text-align:center;font-weight:800;
-    font-size:12px;letter-spacing:.03em;text-transform:uppercase;padding:10px 14px}
+  .strip{position:relative;background:var(--accent);color:#0c2230;text-align:center;font-weight:800;
+    font-size:12px;letter-spacing:.03em;text-transform:uppercase;padding:10px 52px;
+    display:flex;align-items:center;justify-content:center}
+  .strip-badge{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:34px;height:34px;
+    border-radius:50%;object-fit:cover;clip-path:circle(47%)}
 
   main{flex:1;padding:46px 0 40px;
     background:radial-gradient(600px 320px at 50% -60px,var(--accent-dim),transparent 70%),var(--bg)}
@@ -154,13 +157,17 @@
     .recap{margin-top:30px}
     .recap-item{padding:12px 14px}
     .recap-item p{font-size:13px}
-    .strip{font-size:11px;padding:9px 12px}
+    .strip{font-size:10px;padding:9px 44px;letter-spacing:.02em}
+    .strip-badge{width:28px;height:28px;right:10px}
   }
 </style>
 </head>
 <body>
 
-<div class="strip">⚡ Your application isn't complete yet — one step left</div>
+<div class="strip">
+  <span>⚡ Your application isn't complete yet — one step left</span>
+  <img src="../img/right.jpeg" alt="Better Body Academy — Transformation Team" class="strip-badge">
+</div>
 
 <main>
   <div class="wrap">
