@@ -200,14 +200,14 @@
          button stays visible. Mobile (<=600px) is unaffected. */
       @media (min-width: 601px) {
         .hero-birthday {
-          /* Show the WHOLE image (no cropping) sized to fit the viewport
-             with room for the Apply button. The image has a pure-white
-             background, so a white fill makes the letterbox blend in and
-             it still reads as a full-width banner. */
-          height: calc(100vh - 132px);
-          max-height: 880px;
+          /* Let the banner take its natural full-width height (full image,
+             no gaps) on tablet/iPad. Only CAP the height on wide screens
+             where the full-width image would be too tall to leave room for
+             the Apply button — there it fits inside on a white fill that
+             blends with the image's pure-white background. */
+          height: auto;
+          max-height: calc(100vh - 140px);
           object-fit: contain;
-          object-position: center bottom;
           background: #ffffff;
         }
       }
