@@ -195,23 +195,22 @@
         margin-bottom: 12px;
         border-radius: 0;
       }
-      /* Non-mobile views (>=601px): banner STRETCHED full-width edge-to-edge at
-         its natural aspect — the full image, no crop, no overlay, no white bands.
-         The .banner-stage wrapper is inert here (display:contents) so the photo
-         behaves exactly like the full-bleed mobile banner. The Apply button + the
-         offer card flow below and scroll. Mobile (<=600px) is untouched. */
+      /* Non-mobile views (>=601px): show the FULL photo (uncropped) but cap its
+         height so the Apply button + the "6 Months Free" card are visible without
+         scrolling. The photo scales down proportionally and is centered — no crop,
+         no overlay. Mobile (<=600px) is untouched. */
       @media (min-width: 601px) {
         .banner-stage {
           display: contents;
         }
         .hero-birthday {
-          width: 100vw;
+          width: auto;
           max-width: 100vw;
-          margin-left: calc(50% - 50vw);
-          margin-right: calc(50% - 50vw);
           height: auto;
-          max-height: none;
-          object-fit: fill;
+          max-height: min(calc(100vh - 320px), 500px);
+          margin-left: auto;
+          margin-right: auto;
+          object-fit: contain;
           border-radius: 0;
         }
       }
