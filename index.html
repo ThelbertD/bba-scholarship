@@ -200,8 +200,10 @@
          button stays visible. Mobile (<=600px) is unaffected. */
       @media (min-width: 601px) {
         .hero-birthday {
-          height: 46vh;
-          max-height: 440px;
+          /* Big banner that fills most of the viewport but always leaves
+             room (~170px) for the Apply button so it stays in view. */
+          height: calc(100vh - 170px);
+          max-height: 820px;
           object-fit: cover;
           object-position: center top;
         }
