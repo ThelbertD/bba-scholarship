@@ -195,6 +195,17 @@
         margin-bottom: 12px;
         border-radius: 0;
       }
+      /* On larger screens the full-bleed banner would get too tall and push
+         the Apply button off-screen — cap its height (cover-crop) so the
+         button stays visible. Mobile (<=600px) is unaffected. */
+      @media (min-width: 601px) {
+        .hero-birthday {
+          height: 46vh;
+          max-height: 440px;
+          object-fit: cover;
+          object-position: center top;
+        }
+      }
       .hero-apply {
         display: inline-block;
         background: var(--accent);
