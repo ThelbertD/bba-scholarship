@@ -1021,6 +1021,11 @@
           margin-bottom: 12px;
           border-radius: 0;
         }
+        /* Override the base .hero-apply margin (which sits later in the
+           sheet and otherwise wins) so the button hugs the next section. */
+        .hero-apply {
+          margin-bottom: 0;
+        }
         /* tighten generous section spacing on phones for a consistent, compact feel */
         section {
           padding: 18px 0;
