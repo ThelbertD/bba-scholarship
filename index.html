@@ -211,6 +211,17 @@
           background: #ffffff;
         }
       }
+      /* PC / laptop: give the banner a fixed fill-height so the picture +
+         Apply button fill the screen at ANY width and "What You're Applying
+         For" sits below the fold. object-fit:contain + white fill means the
+         image is never cropped and the fill blends with its white background
+         (no visible gap). */
+      @media (min-width: 1200px) {
+        .hero-birthday {
+          height: calc(100vh - 110px);
+          max-height: none;
+        }
+      }
       .hero-apply {
         display: inline-block;
         background: var(--accent);
