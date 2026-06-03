@@ -211,6 +211,24 @@
           background: #ffffff;
         }
       }
+      /* PC / laptop — show only the picture + Apply button (next section
+         pushed below the fold). Two cases:
+         - WIDE screens (>=2:1): the banner can fill the height with only a
+           seamless white side-blend, so grow it to fill. */
+      @media (min-width: 1200px) and (min-aspect-ratio: 2/1) {
+        .hero-birthday {
+          height: calc(100vh - 98px);
+          max-height: none;
+        }
+      }
+      /* - SQUARER screens (e.g. 1400x900): filling would add white bands, so
+           keep the banner at its natural full-width size (no white, no crop)
+           and push the next section below the fold via the hero instead. */
+      @media (min-width: 1200px) and (max-aspect-ratio: 2/1) {
+        .hero {
+          min-height: 100vh;
+        }
+      }
       .hero-apply {
         display: inline-block;
         background: var(--accent);
