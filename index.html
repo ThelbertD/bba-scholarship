@@ -211,6 +211,14 @@
           background: #ffffff;
         }
       }
+      /* PC / laptop only: make the hero fill the screen so only the picture
+         and the Apply button show on first load; the next section is pushed
+         below the fold. Tablet/iPad keep their natural compact layout. */
+      @media (min-width: 1200px) {
+        .hero {
+          min-height: 100vh;
+        }
+      }
       .hero-apply {
         display: inline-block;
         background: var(--accent);
