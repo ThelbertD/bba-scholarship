@@ -195,52 +195,21 @@
         margin-bottom: 12px;
         border-radius: 0;
       }
-      /* On larger screens the full-bleed banner would get too tall and push
-         the Apply button off-screen — cap its height (cover-crop) so the
-         button stays visible. Mobile (<=600px) is unaffected. */
+      /* Non-mobile views (>=601px): banner STRETCHED full-width edge-to-edge
+         showing the FULL ORIGINAL image — NO crop, NO white side-bands. It keeps
+         its natural aspect at full width, so its height follows the width. The
+         Apply button sits directly below it and the offer section flows after.
+         Mobile (<=600px) is untouched. */
       @media (min-width: 601px) {
-        .hero-birthday {
-          /* Let the banner take its natural full-width height (full image,
-             no gaps) on tablet/iPad. Only CAP the height on wide screens
-             where the full-width image would be too tall to leave room for
-             the Apply button — there it fits inside on a white fill that
-             blends with the image's pure-white background. */
-          height: auto;
-          max-height: calc(100vh - 140px);
-          object-fit: contain;
-          background: #ffffff;
-        }
-      }
-      /* Non-mobile LANDSCAPE views (>=601px wide AND >=4:3: laptops, PCs,
-         MacBooks, iPad landscape): banner STRETCHED full-width edge-to-edge and
-         as tall as possible while still showing the Apply button + the "What
-         You're Applying For" section on one screen (the next section is pushed
-         below the fold). The banner fills the leftover height via cover, anchored
-         to the top so the title + faces stay intact and only the lower legs are
-         trimmed. The 4:3 gate excludes portrait/squarish tablets — where filling
-         a tall box would crop the wide image's sides (cutting the title and end
-         people); those keep the full natural image above. Mobile is untouched. */
-      @media (min-width: 601px) and (min-aspect-ratio: 4/3) {
         .hero-birthday {
           width: 100vw;
           max-width: 100vw;
           margin-left: calc(50% - 50vw);
           margin-right: calc(50% - 50vw);
-          height: calc(100vh - 305px);
+          height: auto;
           max-height: none;
-          object-fit: cover;
-          object-position: center top;
+          object-fit: fill;
           background: #ffffff;
-        }
-        .hero {
-          padding-bottom: 2px;
-        }
-        section.offer {
-          padding-top: 6px;
-          padding-bottom: 10px;
-        }
-        .offer .sec-title {
-          margin-bottom: 10px;
         }
       }
       .hero-apply {
