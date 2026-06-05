@@ -1972,7 +1972,7 @@
         });
       })();
 
-      // Route form submit to the coach-specific thank-you page
+      // Submit form to Google Sheets, then redirect to coach-specific thank-you page
       (function () {
         var form = document.querySelector('form');
         if (!form) return;
@@ -1982,12 +1982,18 @@
           Dom: 'thankyou-dom/',
           Erin: 'thankyou-erin/',
         };
+        var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxR3aFFFNJ-Tj-eeDD48wZpcGljAibrPqLXjOypH0205ZawjFOgDOQwSVis58sSF8EkIA/exec';
         form.addEventListener('submit', function (e) {
           e.preventDefault();
           if (!form.reportValidity()) return;
           var coach = (form.querySelector('select[name="coach"]') || {}).value;
           var dest = pages[coach];
-          if (dest) window.location.href = dest;
+          var submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+          if (submitBtn) submitBtn.disabled = true;
+          var body = new URLSearchParams();
+          new FormData(form).forEach(function (v, k) { body.append(k, v); });
+          var done = function () { if (dest) window.location.href = dest; };
+          fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body }).then(done, done);
         });
       })();
     </script>
