@@ -48,6 +48,15 @@
     }
     fix();
     window.addEventListener("load", fix);
-    [200, 600, 1500, 3000].forEach(function (t) { setTimeout(fix, t); });
+    // GHL re-applies its section min-height after load — keep collapsing it for
+    // ~20s, then watch for any later changes, so the empty space can't come back.
+    var n = 0, iv = setInterval(function () { fix(); if (++n > 40) clearInterval(iv); }, 500);
+    if (window.MutationObserver) {
+      try {
+        new MutationObserver(fix).observe(document.body, {
+          attributes: true, subtree: true, attributeFilter: ["style", "class"]
+        });
+      } catch (_) {}
+    }
   })();
 </script>
