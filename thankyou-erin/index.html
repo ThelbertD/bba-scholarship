@@ -181,13 +181,10 @@
     <div class="video-section">
       <span class="watch-tag">▶ WATCH THIS FIRST</span>
       <div class="video-card">
-        <div class="video-wrap" id="videoWrap">
-          <video class="video-player" id="vid" playsinline preload="auto" poster="erin-poster.jpg">
-            <source src="erin.mp4" type="video/mp4">
-          </video>
-          <button class="play-btn" id="playBtn" aria-label="Play video">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </button>
+        <div class="video-wrap">
+          <iframe class="video-player" src="https://player.vimeo.com/video/1199633461?title=0&byline=0&portrait=0"
+            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+            title="Better Body Academy"></iframe>
         </div>
         <p class="video-caption">You must stop scrolling →</p>
       </div>
@@ -256,14 +253,5 @@
   </div>
 </footer>
 
-<script>
-  (function(){
-    var wrap=document.getElementById('videoWrap'),vid=document.getElementById('vid'),btn=document.getElementById('playBtn');
-    if(!wrap||!vid||!btn)return;
-    function play(){vid.setAttribute('controls','');wrap.classList.add('playing');vid.play();}
-    btn.addEventListener('click',play);
-    wrap.addEventListener('click',function(e){if(e.target===wrap)play();});
-  })();
-</script>
 </body>
 </html>
