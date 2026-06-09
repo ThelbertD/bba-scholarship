@@ -32,6 +32,11 @@
     -webkit-appearance:none; appearance:none;
   }
   .bba-field input::placeholder, .bba-field textarea::placeholder { color:#565b64 !important; opacity:1; }
+  /* dropdown placeholder (e.g. "Select your coach") muted like the inputs;
+     real options stay white in the open list */
+  .bba-field select:invalid { color:#565b64 !important; }
+  .bba-field select option { color:var(--white) !important; background:var(--bg) !important; }
+  .bba-field select option[disabled] { color:#565b64 !important; }
   .bba-field input:focus, .bba-field textarea:focus, .bba-field select:focus {
     outline:none !important; border-color:var(--accent) !important; box-shadow:0 0 0 3px var(--accent-dim) !important;
   }
