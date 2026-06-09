@@ -2059,11 +2059,39 @@
           if (submitBtn) submitBtn.disabled = true;
           var body = new URLSearchParams();
           new FormData(form).forEach(function (v, k) { body.append(k, v); });
-          var done = function () { if (dest) window.location.href = dest; };
+          var done = function () {
+            if (!dest) return;
+            // If embedded in a GHL iframe, break out to the top window so the
+            // thank-you page replaces the whole funnel step (not just the frame).
+            try { window.top.location.href = dest; }
+            catch (_) { window.location.href = dest; }
+          };
           fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body }).then(done, done);
         });
       })();
+
+      // ===== Auto-height for iframe embeds (e.g. GHL) =====
+      // Reports this page's height to the parent window so the embedding iframe
+      // can grow to fit — no inner scrollbar, looks like a native section.
+      (function () {
+        function postHeight() {
+          var h = Math.max(
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.offsetHeight
+          );
+          try { parent.postMessage({ bbaHeight: h }, "*"); } catch (_) {}
+        }
+        window.addEventListener("load", postHeight);
+        window.addEventListener("resize", postHeight);
+        if (window.ResizeObserver) {
+          try { new ResizeObserver(postHeight).observe(document.body); } catch (_) {}
+        }
+        // catch late-loading images/videos and font reflow
+        [300, 800, 1500, 3000].forEach(function (t) { setTimeout(postHeight, t); });
+      })();
     </script>
-  
+
 
 </body></html>
