@@ -1,0 +1,47 @@
+<!--
+  ════════════════════════════════════════════════════════════════════════
+  JASE THANK-YOU PAGE — paste this into the GHL Custom JS/HTML (Code) element
+  of the Jase thank-you funnel step. Full-width, auto-height, no extra space.
+  ════════════════════════════════════════════════════════════════════════
+-->
+<style>
+  html, body { margin:0 !important; padding:0 !important; overflow-x:hidden !important; }
+  #bba-ty-frame { display:block; border:0; width:100%; }
+</style>
+
+<iframe
+  id="bba-ty-frame"
+  src="https://thelbertd.github.io/bba-scholarship/thankyou-jase/index.html?v=1"
+  style="width:100%; height:100vh; border:0; display:block;"
+  allow="autoplay; fullscreen; picture-in-picture">
+</iframe>
+
+<script>
+  window.addEventListener("message", function (e) {
+    if (e.data && e.data.bbaHeight) {
+      var f = document.getElementById("bba-ty-frame");
+      if (f) f.style.height = e.data.bbaHeight + "px";
+    }
+  });
+
+  (function () {
+    function fix() {
+      var el = document.getElementById("bba-ty-frame");
+      el = el ? el.parentElement : null;
+      while (el && el !== document.body) {
+        el.style.setProperty("max-width", "100%", "important");
+        el.style.setProperty("width", "100%", "important");
+        el.style.setProperty("padding-left", "0", "important");
+        el.style.setProperty("padding-right", "0", "important");
+        el.style.setProperty("margin-left", "0", "important");
+        el.style.setProperty("margin-right", "0", "important");
+        el.style.setProperty("min-height", "0", "important");
+        el.style.setProperty("height", "auto", "important");
+        el = el.parentElement;
+      }
+    }
+    fix();
+    window.addEventListener("load", fix);
+    [200, 600, 1500, 3000].forEach(function (t) { setTimeout(fix, t); });
+  })();
+</script>
