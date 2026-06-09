@@ -26,13 +26,24 @@
   .bba-field input,
   .bba-field textarea,
   .bba-field select {
-    width:100%; background:var(--bg); border:1px solid var(--line);
-    border-radius:10px; color:var(--white); font-family:inherit; font-size:16px;
-    padding:13px 14px;
+    width:100% !important; background:var(--bg) !important; border:1px solid var(--line) !important;
+    border-radius:10px !important; color:var(--white) !important; font-family:inherit !important;
+    font-size:16px !important; padding:13px 14px !important; box-shadow:none !important;
+    -webkit-appearance:none; appearance:none;
   }
-  .bba-field input::placeholder, .bba-field textarea::placeholder { color:#565b64; }
+  .bba-field input::placeholder, .bba-field textarea::placeholder { color:#565b64 !important; opacity:1; }
   .bba-field input:focus, .bba-field textarea:focus, .bba-field select:focus {
-    outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-dim);
+    outline:none !important; border-color:var(--accent) !important; box-shadow:0 0 0 3px var(--accent-dim) !important;
+  }
+  /* kill the white box browsers paint on autofilled fields */
+  .bba-field input:-webkit-autofill,
+  .bba-field input:-webkit-autofill:hover,
+  .bba-field input:-webkit-autofill:focus,
+  .bba-field textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--bg) inset !important;
+    -webkit-text-fill-color: var(--white) !important;
+    caret-color: var(--white);
+    transition: background-color 9999s ease-in-out 0s;
   }
   .bba-field textarea { resize:vertical; min-height:88px; }
   .bba-submit {
