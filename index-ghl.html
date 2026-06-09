@@ -1124,7 +1124,7 @@
         <div class="banner-stage">
           <img src="img/WEBFILES%20(2).jpg" alt="Jase's Birthday — Win 6 Months Free Coaching" class="hero-birthday">
         </div>
-        <a href="#apply" class="hero-apply">Apply Now</a>
+        <a href="#apply" class="hero-apply" id="applyBtn">Apply Now</a>
       </div>
     </header>
 
@@ -2079,6 +2079,25 @@
             }
           };
           fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body }).then(done, done);
+        });
+      })();
+
+      // ===== "Apply Now" button → scroll the PARENT page to the form =====
+      // The page is inside the GHL iframe, so a normal #apply jump can't move the
+      // parent. Tell the parent how far down the form is and let it scroll.
+      (function () {
+        var btn = document.getElementById("applyBtn");
+        var apply = document.getElementById("apply");
+        if (!btn || !apply) return;
+        btn.addEventListener("click", function (e) {
+          var y = apply.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
+          var inIframe = false;
+          try { inIframe = window.self !== window.top; } catch (_) { inIframe = true; }
+          if (inIframe) {
+            e.preventDefault();
+            try { parent.postMessage({ bbaScrollTo: y }, "*"); } catch (_) {}
+          }
+          // not embedded → the default #apply anchor scroll works
         });
       })();
 
