@@ -2075,15 +2075,18 @@
       // to fit. When embedded, we also hide THIS page's own scrollbar — the iframe
       // is sized to the content, so there should never be an inner scrollbar.
       (function () {
-        // When embedded in an iframe (GHL), hide THIS page's own (long) scrollbar.
-        // The iframe is auto-sized to the full content height below, so the whole
-        // page is visible and scrolling happens via the parent page's scrollbar.
-        // .scroller elements keep their own horizontal scroll — unaffected.
+        // When embedded in an iframe (GHL), hide THIS page's own (long) scrollbar
+        // VISUALLY only — we do NOT use overflow:hidden, because that clamps the
+        // root element to the iframe height and makes the auto-height ratchet up
+        // (leaving big empty space after the footer). Hiding just the scrollbar
+        // keeps the true content height intact so the iframe sizes correctly.
         var embedded = false;
         try { embedded = window.self !== window.top; } catch (_) { embedded = true; }
         if (embedded) {
           var s = document.createElement("style");
-          s.textContent = "html,body{overflow:hidden !important;}";
+          s.textContent =
+            "html{scrollbar-width:none !important;-ms-overflow-style:none !important;}" +
+            "html::-webkit-scrollbar,body::-webkit-scrollbar{width:0 !important;height:0 !important;display:none !important;}";
           (document.head || document.documentElement).appendChild(s);
         }
         function postHeight() {
