@@ -1082,6 +1082,33 @@
         .filter-col {
           padding: 18px 16px;
         }
+        /* ===== mobile optimisations ===== */
+        .wrap { padding: 0 14px; }
+        .hero-apply {
+          display: inline-block;
+          font-size: 15px;
+          padding: 13px 32px;
+          margin-top: 4px;
+        }
+        .offer-card { padding: 18px 16px; }
+        .offer-card .big { font-size: 24px; }
+        .offer-card p { font-size: 13px; }
+        .inc-item { padding: 12px 14px; }
+        .inc-item p { font-size: 13px; }
+        .filter-col h3 { font-size: 14px; }
+        .filter-col li { font-size: 12px; }
+        .sec-tag { font-size: 10px; }
+        /* GHL form: edge-to-edge inside the card, comfortable height on phones */
+        .form-box { padding: 0 !important; }
+        #inline-YXe9Kv2HtkpxQa6jzTE3 { min-height: 760px; }
+      }
+
+      /* very small phones */
+      @media (max-width: 380px) {
+        .wrap { padding: 0 12px; }
+        .hero h1 { font-size: 22px; }
+        .ba-card { flex: 0 0 200px; }
+        .vt-card { flex: 0 0 180px; }
       }
     </style>
   </head>
@@ -1097,6 +1124,7 @@
         <div class="banner-stage">
           <img src="img/WEBFILES%20(2).jpg" alt="Jase's Birthday — Win 6 Months Free Coaching" class="hero-birthday">
         </div>
+        <a href="#apply" class="hero-apply">Apply Now</a>
       </div>
     </header>
 
