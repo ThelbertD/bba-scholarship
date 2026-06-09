@@ -13,7 +13,7 @@
 
 <iframe
   id="bba-frame"
-  src="https://thelbertd.github.io/bba-scholarship/index-ghl.html?v=4"
+  src="https://thelbertd.github.io/bba-scholarship/index-ghl.html?v=5"
   style="width:100%; height:100vh; border:0; display:block;"
   allow="autoplay; fullscreen; picture-in-picture">
 </iframe>
@@ -27,11 +27,11 @@
     }
   });
 
-  // 2) Make the page full width by forcing every GHL wrapper around this
-  //    block to 100% width with no side padding. No negative-margin tricks,
-  //    so nothing shifts — it simply fills whatever it sits in, edge to edge.
+  // 2) Force every GHL wrapper around this block to full width AND collapse its
+  //    height/min-height to the iframe. GHL sections have a built-in min-height
+  //    that otherwise leaves empty space below the footer — this removes it.
   (function () {
-    function fullWidth() {
+    function fix() {
       var el = document.getElementById("bba-frame");
       el = el ? el.parentElement : null;
       while (el && el !== document.body) {
@@ -41,11 +41,13 @@
         el.style.setProperty("padding-right", "0", "important");
         el.style.setProperty("margin-left", "0", "important");
         el.style.setProperty("margin-right", "0", "important");
+        el.style.setProperty("min-height", "0", "important");
+        el.style.setProperty("height", "auto", "important");
         el = el.parentElement;
       }
     }
-    fullWidth();
-    window.addEventListener("load", fullWidth);
-    [200, 600, 1500].forEach(function (t) { setTimeout(fullWidth, t); });
+    fix();
+    window.addEventListener("load", fix);
+    [200, 600, 1500, 3000].forEach(function (t) { setTimeout(fix, t); });
   })();
 </script>
