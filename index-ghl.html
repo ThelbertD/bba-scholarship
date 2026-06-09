@@ -1533,20 +1533,29 @@
           // Kill any border/box-shadow GHL's form_embed.js puts on the iframe
           // (the faint line below the form). Keep enforcing in case it re-adds.
           (function () {
-            function noBorder() {
-              var f = document.getElementById('inline-YXe9Kv2HtkpxQa6jzTE3');
-              if (!f) return;
-              [f, f.parentElement, f.closest('.form-box')].forEach(function (el) {
-                if (!el) return;
+            // Strip borders/shadows off EVERYTHING in the apply section — the
+            // form iframe, any wrapper the GHL embed script injects, and any
+            // sibling divider element it adds (the faint line below the form).
+            // Anything inside the cross-origin form iframe is untouchable here.
+            function nukeLines() {
+              var scope = document.getElementById('apply');
+              if (!scope) return;
+              var els = scope.querySelectorAll('*');
+              for (var i = 0; i < els.length; i++) {
+                var el = els[i];
                 el.style.setProperty('border', 'none', 'important');
-                el.style.setProperty('border-top', 'none', 'important');
-                el.style.setProperty('border-bottom', 'none', 'important');
                 el.style.setProperty('box-shadow', 'none', 'important');
                 el.style.setProperty('outline', 'none', 'important');
-              });
+                // hide any standalone thin horizontal rule the embed may add
+                if (el.tagName === 'HR') el.style.setProperty('display', 'none', 'important');
+              }
             }
-            noBorder();
-            var n = 0, iv = setInterval(function () { noBorder(); if (++n > 40) clearInterval(iv); }, 500);
+            nukeLines();
+            window.addEventListener('load', nukeLines);
+            var n = 0, iv = setInterval(function () { nukeLines(); if (++n > 60) clearInterval(iv); }, 500);
+            if (window.MutationObserver) {
+              try { new MutationObserver(nukeLines).observe(document.getElementById('apply'), { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] }); } catch (_) {}
+            }
           })();
         </script>
       </div>
