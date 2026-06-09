@@ -126,6 +126,20 @@
     var form = document.querySelector('form.bba-form');
     if (!form) return;
 
+    // Hide GHL's own native submit button — this custom form has its own.
+    function hideNativeSubmit() {
+      var ours = form.querySelector('.bba-submit');
+      document.querySelectorAll(
+        'button[type="submit"], input[type="submit"], .ghl-btn, .form-builder--submit, [data-element="button"]'
+      ).forEach(function (b) {
+        if (b === ours || form.contains(b)) return; // keep our own button
+        b.style.setProperty('display', 'none', 'important');
+      });
+    }
+    hideNativeSubmit();
+    window.addEventListener('load', hideNativeSubmit);
+    [200, 600, 1500, 3000].forEach(function (t) { setTimeout(hideNativeSubmit, t); });
+
     // ── CONFIG ──────────────────────────────────────────────────────────
     // 1) Google Sheet (your existing Apps Script Web App). Leave to keep saving.
     var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxR3aFFFNJ-Tj-eeDD48wZpcGljAibrPqLXjOypH0205ZawjFOgDOQwSVis58sSF8EkIA/exec';
