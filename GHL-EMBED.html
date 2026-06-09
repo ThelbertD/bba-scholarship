@@ -13,17 +13,40 @@
 
 <iframe
   id="bba-frame"
-  src="https://thelbertd.github.io/bba-scholarship/index-ghl.html?v=5"
+  src="https://thelbertd.github.io/bba-scholarship/index-ghl.html?v=6"
   style="width:100%; height:100vh; border:0; display:block;"
   allow="autoplay; fullscreen; picture-in-picture">
 </iframe>
 
 <script>
-  // 1) Auto-resize the iframe to fit its content (no inner scrollbar).
+  // ═══════════════════════════════════════════════════════════════════════
+  //  COACH → GHL THANK-YOU PAGE  —  paste each published GHL funnel-step URL.
+  //  When someone picks a coach and submits the form, this page redirects to
+  //  the matching URL below. Leave a value as-is to skip that coach for now.
+  // ═══════════════════════════════════════════════════════════════════════
+  var THANKYOU = {
+    Jase:  "PASTE_GHL_THANKYOU_URL_JASE",
+    Carly: "PASTE_GHL_THANKYOU_URL_CARLY",
+    Dom:   "PASTE_GHL_THANKYOU_URL_DOM",
+    Erin:  "PASTE_GHL_THANKYOU_URL_ERIN"
+  };
+
   window.addEventListener("message", function (e) {
-    if (e.data && e.data.bbaHeight) {
+    if (!e.data) return;
+
+    // 1) Auto-resize the iframe to fit its content (no inner scrollbar).
+    if (e.data.bbaHeight) {
       var f = document.getElementById("bba-frame");
       if (f) f.style.height = e.data.bbaHeight + "px";
+    }
+
+    // 2) Coach selected on the form → redirect this whole page to their
+    //    GHL thank-you page.
+    if (e.data.bbaCoach) {
+      var url = THANKYOU[e.data.bbaCoach];
+      if (url && url.indexOf("PASTE_") !== 0) {
+        window.location.href = url;
+      }
     }
   });
 
