@@ -20,15 +20,16 @@
 
 <script>
   // ═══════════════════════════════════════════════════════════════════════
-  //  COACH → GHL THANK-YOU PAGE  —  paste each published GHL funnel-step URL.
-  //  When someone picks a coach and submits the form, this page redirects to
-  //  the matching URL below. Leave a value as-is to skip that coach for now.
+  //  COACH → THANK-YOU PAGE  —  where each coach's applicants are sent after
+  //  they submit the form. These point at the hosted thank-you pages so it
+  //  works right now. If you build the thank-you steps inside GHL instead,
+  //  replace any URL below with that GHL funnel-step's public URL.
   // ═══════════════════════════════════════════════════════════════════════
   var THANKYOU = {
-    Jase:  "PASTE_GHL_THANKYOU_URL_JASE",
-    Carly: "PASTE_GHL_THANKYOU_URL_CARLY",
-    Dom:   "PASTE_GHL_THANKYOU_URL_DOM",
-    Erin:  "PASTE_GHL_THANKYOU_URL_ERIN"
+    Jase:  "https://thelbertd.github.io/bba-scholarship/thankyou-jase/index.html",
+    Carly: "https://thelbertd.github.io/bba-scholarship/thankyou-carly/index.html",
+    Dom:   "https://thelbertd.github.io/bba-scholarship/thankyou-dom/index.html",
+    Erin:  "https://thelbertd.github.io/bba-scholarship/thankyou-erin/index.html"
   };
 
   window.addEventListener("message", function (e) {
