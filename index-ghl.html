@@ -1529,6 +1529,21 @@
           </iframe>
           <script src="https://link.apisystem.tech/js/form_embed.js"></script>
         </div>
+        <script>
+          // Kill any border/box-shadow GHL's form_embed.js puts on the iframe
+          // (the faint line below the form). Keep enforcing in case it re-adds.
+          (function () {
+            var f = document.getElementById('inline-YXe9Kv2HtkpxQa6jzTE3');
+            if (!f) return;
+            function noBorder() {
+              f.style.setProperty('border', 'none', 'important');
+              f.style.setProperty('box-shadow', 'none', 'important');
+              f.style.setProperty('outline', 'none', 'important');
+            }
+            noBorder();
+            var n = 0, iv = setInterval(function () { noBorder(); if (++n > 40) clearInterval(iv); }, 500);
+          })();
+        </script>
       </div>
     </section>
 
