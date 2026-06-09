@@ -7,6 +7,7 @@
   ════════════════════════════════════════════════════════════════════════
 -->
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800;900&display=swap');
   .bba-form * { box-sizing: border-box; }
   .bba-form {
     --bg:#16181c; --panel:#1e2127; --white:#f4f5f7; --grey:#a4a9b3;
@@ -119,3 +120,59 @@
   <button type="submit" class="bba-submit">Submit Application</button>
   <p class="bba-foot">⚠ One more step after this — you'll need to DM us on Instagram to qualify. Winner announced soon.</p>
 </form>
+
+<script>
+  (function () {
+    var form = document.querySelector('form.bba-form');
+    if (!form) return;
+
+    // ── CONFIG ──────────────────────────────────────────────────────────
+    // 1) Google Sheet (your existing Apps Script Web App). Leave to keep saving.
+    var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxR3aFFFNJ-Tj-eeDD48wZpcGljAibrPqLXjOypH0205ZawjFOgDOQwSVis58sSF8EkIA/exec';
+    // 2) GHL Inbound Webhook URL — paste it to push each submission into GHL so
+    //    a Workflow can send the email. Leave "" to skip.
+    var WEBHOOK_URL = '';
+    // 3) Coach → thank-you page redirect (after submit).
+    var pages = {
+      Jase:  'https://thelbertd.github.io/bba-scholarship/thankyou-jase/index.html',
+      Carly: 'https://thelbertd.github.io/bba-scholarship/thankyou-carly/index.html',
+      Dom:   'https://thelbertd.github.io/bba-scholarship/thankyou-dom/index.html',
+      Erin:  'https://thelbertd.github.io/bba-scholarship/thankyou-erin/index.html'
+    };
+    // ────────────────────────────────────────────────────────────────────
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      var btn = form.querySelector('.bba-submit');
+      if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
+
+      var data = {}, body = new URLSearchParams();
+      new FormData(form).forEach(function (v, k) { data[k] = v; body.append(k, v); });
+
+      var dest = pages[data.coach];
+      var go = function () {
+        if (!dest) return;
+        // break out of an iframe if embedded, else normal redirect
+        try { window.top.location.href = dest; } catch (_) { window.location.href = dest; }
+      };
+
+      var posts = [];
+      if (SHEET_ENDPOINT) {
+        posts.push(fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body }));
+      }
+      if (WEBHOOK_URL) {
+        posts.push(fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }));
+      }
+      if (!posts.length) { go(); return; }
+      (Promise.allSettled ? Promise.allSettled(posts) : Promise.all(posts.map(function (p) {
+        return p.then(function (r) { return r; }, function (e) { return e; });
+      }))).then(go, go);
+    });
+  })();
+</script>
