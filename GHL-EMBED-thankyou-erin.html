@@ -1,0 +1,62 @@
+<!--
+  ════════════════════════════════════════════════════════════════════════
+  ERIN THANK-YOU PAGE — paste this into the GHL Custom JS/HTML (Code) element
+  of the Erin thank-you funnel step. Full-width, auto-height, no extra space.
+  Same layout/behaviour as Jase, Carly and Dom (Erin uses a Vimeo video).
+  ════════════════════════════════════════════════════════════════════════
+-->
+<style>
+  html, body { margin:0 !important; padding:0 !important; overflow-x:hidden !important; }
+  /* Break the iframe out to the FULL viewport width (transform method — no shift) */
+  #bba-ty-frame {
+    display:block; border:0;
+    width:100vw; max-width:100vw;
+    position:relative; left:50%; transform:translateX(-50%);
+  }
+</style>
+
+<iframe
+  id="bba-ty-frame"
+  src="https://thelbertd.github.io/bba-scholarship/thankyou-erin/index.html?v=1"
+  style="width:100%; height:100vh; border:0; display:block;"
+  allow="autoplay; fullscreen; picture-in-picture">
+</iframe>
+
+<script>
+  window.addEventListener("message", function (e) {
+    if (e.data && e.data.bbaHeight) {
+      var f = document.getElementById("bba-ty-frame");
+      if (f) f.style.height = e.data.bbaHeight + "px";
+    }
+  });
+
+  (function () {
+    function fix() {
+      var el = document.getElementById("bba-ty-frame");
+      el = el ? el.parentElement : null;
+      while (el && el !== document.body) {
+        el.style.setProperty("max-width", "100%", "important");
+        el.style.setProperty("width", "100%", "important");
+        el.style.setProperty("padding-left", "0", "important");
+        el.style.setProperty("padding-right", "0", "important");
+        el.style.setProperty("margin-left", "0", "important");
+        el.style.setProperty("margin-right", "0", "important");
+        el.style.setProperty("min-height", "0", "important");
+        el.style.setProperty("height", "auto", "important");
+        el = el.parentElement;
+      }
+    }
+    fix();
+    window.addEventListener("load", fix);
+    // GHL re-applies its section min-height after load — keep collapsing it for
+    // ~20s, then watch for any later changes, so the empty space can't come back.
+    var n = 0, iv = setInterval(function () { fix(); if (++n > 40) clearInterval(iv); }, 500);
+    if (window.MutationObserver) {
+      try {
+        new MutationObserver(fix).observe(document.body, {
+          attributes: true, subtree: true, attributeFilter: ["style", "class"]
+        });
+      } catch (_) {}
+    }
+  })();
+</script>

@@ -253,5 +253,39 @@
   </div>
 </footer>
 
+<script>
+  // ===== Auto-height + scrollbar hide for iframe embeds (e.g. GHL) =====
+  (function () {
+    var embedded = false;
+    try { embedded = window.self !== window.top; } catch (_) { embedded = true; }
+    if (embedded) {
+      var s = document.createElement("style");
+      s.textContent =
+        "html{scrollbar-width:none !important;-ms-overflow-style:none !important;}" +
+        "html::-webkit-scrollbar,body::-webkit-scrollbar{width:0 !important;height:0 !important;display:none !important;}" +
+        // page is body{min-height:100vh;flex} + main{flex:1}; that stretches to
+        // fill the tall iframe and pushes the footer down. Collapse to natural height.
+        "body{min-height:0 !important;}" +
+        "main{flex:0 0 auto !important;}";
+      (document.head || document.documentElement).appendChild(s);
+    }
+    function postHeight() {
+      // Measure BODY only — documentElement stretches to the iframe viewport
+      // height, which ratchets the value up and never shrinks (overshoot/space).
+      var h = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+      try { parent.postMessage({ bbaHeight: h }, "*"); } catch (_) {}
+    }
+    window.addEventListener("load", postHeight);
+    window.addEventListener("resize", postHeight);
+    if (window.ResizeObserver) {
+      try { new ResizeObserver(postHeight).observe(document.body); } catch (_) {}
+    }
+    document.querySelectorAll("img,video,iframe").forEach(function (m) {
+      m.addEventListener("load", postHeight);
+    });
+    var n = 0, iv = setInterval(function () { postHeight(); if (++n > 40) clearInterval(iv); }, 500);
+    [100, 300, 800, 1500, 3000].forEach(function (t) { setTimeout(postHeight, t); });
+  })();
+</script>
 </body>
 </html>
