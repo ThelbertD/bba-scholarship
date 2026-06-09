@@ -13,7 +13,7 @@
 
 <iframe
   id="bba-frame"
-  src="https://thelbertd.github.io/bba-scholarship/index-ghl.html?v=6"
+  src="https://thelbertd.github.io/bba-scholarship/index-ghl.html?v=7"
   style="width:100%; height:100vh; border:0; display:block;"
   allow="autoplay; fullscreen; picture-in-picture">
 </iframe>
@@ -72,6 +72,15 @@
     }
     fix();
     window.addEventListener("load", fix);
-    [200, 600, 1500, 3000].forEach(function (t) { setTimeout(fix, t); });
+    // GHL re-applies its section min-height after load — keep collapsing it for
+    // ~20s, then watch for later changes, so empty space can't return (mobile too).
+    var n = 0, iv = setInterval(function () { fix(); if (++n > 40) clearInterval(iv); }, 500);
+    if (window.MutationObserver) {
+      try {
+        new MutationObserver(fix).observe(document.body, {
+          attributes: true, subtree: true, attributeFilter: ["style", "class"]
+        });
+      } catch (_) {}
+    }
   })();
 </script>
