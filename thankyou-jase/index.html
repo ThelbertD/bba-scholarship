@@ -273,7 +273,11 @@
       var s = document.createElement("style");
       s.textContent =
         "html{scrollbar-width:none !important;-ms-overflow-style:none !important;}" +
-        "html::-webkit-scrollbar,body::-webkit-scrollbar{width:0 !important;height:0 !important;display:none !important;}";
+        "html::-webkit-scrollbar,body::-webkit-scrollbar{width:0 !important;height:0 !important;display:none !important;}" +
+        // page is body{min-height:100vh;flex} + main{flex:1}; that stretches to
+        // fill the tall iframe and pushes the footer down. Collapse to natural height.
+        "body{min-height:0 !important;}" +
+        "main{flex:0 0 auto !important;}";
       (document.head || document.documentElement).appendChild(s);
     }
     function postHeight() {
