@@ -2075,15 +2075,6 @@
       // to fit. When embedded, we also hide THIS page's own scrollbar — the iframe
       // is sized to the content, so there should never be an inner scrollbar.
       (function () {
-        var embedded = false;
-        try { embedded = window.self !== window.top; } catch (_) { embedded = true; }
-        if (embedded) {
-          var s = document.createElement("style");
-          // Kill the inner scrollbar (parent iframe shows the whole page).
-          // .scroller elements keep their own horizontal scroll — unaffected.
-          s.textContent = "html,body{overflow:hidden !important;}";
-          (document.head || document.documentElement).appendChild(s);
-        }
         function postHeight() {
           var h = Math.max(
             document.body.scrollHeight,

@@ -7,21 +7,16 @@
   ════════════════════════════════════════════════════════════════════════
 -->
 <style>
-  html, body { margin:0 !important; padding:0 !important; overflow:hidden !important; }
-  /* Wrapper clips any stray scrollbar; iframe never scrolls on its own. */
-  #bba-wrap { width:100%; overflow:hidden; line-height:0; }
-  #bba-frame { display:block; border:0; width:100%; overflow:hidden; }
+  html, body { margin:0 !important; padding:0 !important; overflow-x:hidden !important; }
+  #bba-frame { display:block; border:0; width:100%; }
 </style>
 
-<div id="bba-wrap">
-  <iframe
-    id="bba-frame"
-    src="https://thelbertd.github.io/bba-scholarship/index-ghl.html"
-    style="width:100%; height:100vh; border:0; display:block; overflow:hidden;"
-    scrolling="no"
-    allow="autoplay; fullscreen; picture-in-picture">
-  </iframe>
-</div>
+<iframe
+  id="bba-frame"
+  src="https://thelbertd.github.io/bba-scholarship/index-ghl.html"
+  style="width:100%; height:100vh; border:0; display:block;"
+  allow="autoplay; fullscreen; picture-in-picture">
+</iframe>
 
 <script>
   // 1) Auto-resize the iframe to fit its content (no inner scrollbar).
