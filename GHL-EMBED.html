@@ -1,0 +1,52 @@
+<!--
+  ════════════════════════════════════════════════════════════════════════
+  PASTE THIS (AND ONLY THIS) INTO A GHL CUSTOM JS/HTML (CODE) ELEMENT.
+  It loads the full scholarship page, makes it span the whole width, and
+  auto-resizes the height so there is no inner scrollbar.
+  You do NOT paste index-ghl.html — it is already hosted and loaded below.
+  ════════════════════════════════════════════════════════════════════════
+-->
+<style>
+  html, body { margin:0 !important; padding:0 !important; overflow-x:hidden !important; }
+  #bba-frame { display:block; border:0; width:100%; }
+</style>
+
+<iframe
+  id="bba-frame"
+  src="https://thelbertd.github.io/bba-scholarship/index-ghl.html"
+  style="width:100%; height:100vh; border:0; display:block;"
+  scrolling="no"
+  allow="autoplay; fullscreen; picture-in-picture">
+</iframe>
+
+<script>
+  // 1) Auto-resize the iframe to fit its content (no inner scrollbar).
+  window.addEventListener("message", function (e) {
+    if (e.data && e.data.bbaHeight) {
+      var f = document.getElementById("bba-frame");
+      if (f) f.style.height = e.data.bbaHeight + "px";
+    }
+  });
+
+  // 2) Make the page full width by forcing every GHL wrapper around this
+  //    block to 100% width with no side padding. No negative-margin tricks,
+  //    so nothing shifts — it simply fills whatever it sits in, edge to edge.
+  (function () {
+    function fullWidth() {
+      var el = document.getElementById("bba-frame");
+      el = el ? el.parentElement : null;
+      while (el && el !== document.body) {
+        el.style.setProperty("max-width", "100%", "important");
+        el.style.setProperty("width", "100%", "important");
+        el.style.setProperty("padding-left", "0", "important");
+        el.style.setProperty("padding-right", "0", "important");
+        el.style.setProperty("margin-left", "0", "important");
+        el.style.setProperty("margin-right", "0", "important");
+        el = el.parentElement;
+      }
+    }
+    fullWidth();
+    window.addEventListener("load", fullWidth);
+    [200, 600, 1500].forEach(function (t) { setTimeout(fullWidth, t); });
+  })();
+</script>

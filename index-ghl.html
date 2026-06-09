@@ -2071,9 +2071,19 @@
       })();
 
       // ===== Auto-height for iframe embeds (e.g. GHL) =====
-      // Reports this page's height to the parent window so the embedding iframe
-      // can grow to fit — no inner scrollbar, looks like a native section.
+      // Reports this page's height to the parent so the embedding iframe can grow
+      // to fit. When embedded, we also hide THIS page's own scrollbar — the iframe
+      // is sized to the content, so there should never be an inner scrollbar.
       (function () {
+        var embedded = false;
+        try { embedded = window.self !== window.top; } catch (_) { embedded = true; }
+        if (embedded) {
+          var s = document.createElement("style");
+          // Kill the inner scrollbar (parent iframe shows the whole page).
+          // .scroller elements keep their own horizontal scroll — unaffected.
+          s.textContent = "html,body{overflow:hidden !important;}";
+          (document.head || document.documentElement).appendChild(s);
+        }
         function postHeight() {
           var h = Math.max(
             document.body.scrollHeight,
@@ -2088,8 +2098,17 @@
         if (window.ResizeObserver) {
           try { new ResizeObserver(postHeight).observe(document.body); } catch (_) {}
         }
-        // catch late-loading images/videos and font reflow
-        [300, 800, 1500, 3000].forEach(function (t) { setTimeout(postHeight, t); });
+        // images/videos change layout once they load
+        document.querySelectorAll("img,video").forEach(function (m) {
+          m.addEventListener("load", postHeight);
+          m.addEventListener("loadeddata", postHeight);
+        });
+        // keep nudging for ~20s to catch any late reflow, then stop
+        var n = 0, iv = setInterval(function () {
+          postHeight();
+          if (++n > 40) clearInterval(iv);
+        }, 500);
+        [100, 300, 800, 1500, 3000].forEach(function (t) { setTimeout(postHeight, t); });
       })();
     </script>
 
