@@ -281,12 +281,9 @@
       (document.head || document.documentElement).appendChild(s);
     }
     function postHeight() {
-      var h = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.offsetHeight
-      );
+      // Measure BODY only — documentElement stretches to the iframe viewport
+      // height, which ratchets the value up and never shrinks (overshoot/space).
+      var h = Math.max(document.body.scrollHeight, document.body.offsetHeight);
       try { parent.postMessage({ bbaHeight: h }, "*"); } catch (_) {}
     }
     window.addEventListener("load", postHeight);
